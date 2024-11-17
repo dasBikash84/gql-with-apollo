@@ -125,23 +125,23 @@ type ShoppingCartItem {
 type Query {
   users(skip:ID,take:ID): [User]
   user(user_id: ID!): User
-  # addresses: [Address]
-  address(user_id: ID!): [Address]
+  addresses(skip:ID,take:ID): [Address]
+  address(address_id: ID!): [Address]
   categories(skip:ID,take:ID): [Category]
   category(category_id: ID!): Category
   products(skip:ID,take:ID): [Product]
   product(product_id: ID!): Product
   orders(skip:ID,take:ID): [Order]
   order(order_id: ID!): Order
-  # orderItems: [OrderItem]
+  orderItems(skip:ID,take:ID): [OrderItem]
   orderItem(order_item_id: ID!): OrderItem
   payments(skip:ID,take:ID): [Payment]
-  payment(payment_id: ID!): Payment
-  # productReviews: [ProductReview]
-  # productReview(review_id: ID!): ProductReview
-  # shoppingCarts: [ShoppingCart]
-  # shoppingCart(cart_id: ID!): ShoppingCart
-  # shoppingCartItems: [ShoppingCartItem]
-  # shoppingCartItem(cart_item_id: ID!): ShoppingCartItem
+  paymentItem(payment_id: ID!): Payment
+  productReviews(skip:ID,take:ID): [ProductReview]
+  productReviewItem(review_id: ID!): ProductReview
+  shoppingCarts(skip:ID,take:ID): [ShoppingCart]
+  shoppingCart(cart_id: ID!): ShoppingCart
+  shoppingCartItems(skip:ID,take:ID): [ShoppingCartItem]
+  shoppingCartItem(cart_item_id: ID!): ShoppingCartItem
 }
 `

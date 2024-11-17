@@ -129,6 +129,8 @@ model product_reviews {
   user_id       Int
   product_id    Int
   rating        Int
+  review_text        String
+  created_at    DateTime  @default(now())
 
   user          users      @relation(fields: [user_id], references: [user_id])
   product       products   @relation(fields: [product_id], references: [product_id])
