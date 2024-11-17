@@ -134,9 +134,9 @@ type Query {
   orders(skip:ID,take:ID): [Order]
   order(order_id: ID!): Order
   # orderItems: [OrderItem]
-  # orderItem(order_item_id: ID!): OrderItem
-  # payments: [Payment]
-  # payment(payment_id: ID!): Payment
+  orderItem(order_item_id: ID!): OrderItem
+  payments(skip:ID,take:ID): [Payment]
+  payment(payment_id: ID!): Payment
   # productReviews: [ProductReview]
   # productReview(review_id: ID!): ProductReview
   # shoppingCarts: [ShoppingCart]

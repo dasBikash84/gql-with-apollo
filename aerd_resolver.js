@@ -59,6 +59,23 @@ export const resolvers = {
         where: { order_id: +args["order_id"] },
       });
     },
+    async orderItem(_, args) {
+      return await prisma.order_items.findUnique({
+        where: { order_item_id: +args["order_item_id"] },
+      });
+    },
+    async payments(_, args) {
+      const { skip = 0, take = 10 } = args || {};
+      return await prisma.payments.findMany({
+        take: +take,
+        skip: +skip,
+      });
+    },
+    async payment(_, args) {
+      return await prisma.payments.findUnique({
+        where: { payment_id: +args["payment_id"] },
+      });
+    },
   },
   User: {
     async addresses(parent) {
@@ -129,21 +146,40 @@ export const resolvers = {
       });
     },
   },
-    Order: {
-        async user(parent) {
-        return await prisma.users.findUnique({
-            where: { user_id: parent.user_id },
-        });
-        },
-        async order_items(parent) {
-        return await prisma.order_items.findMany({
-            where: { order_id: +parent.order_id },
-        });
-        },
-        async payments(parent) {
-        return await prisma.payments.findMany({
-            where: { order_id: +parent.order_id },
-        });
-        },
+  Order: {
+    async user(parent) {
+      return await prisma.users.findUnique({
+        where: { user_id: parent.user_id },
+      });
     },
+    async order_items(parent) {
+      return await prisma.order_items.findMany({
+        where: { order_id: +parent.order_id },
+      });
+    },
+    async payments(parent) {
+      return await prisma.payments.findMany({
+        where: { order_id: +parent.order_id },
+      });
+    },
+  },
+  OrderItem: {
+    async order(parent) {
+      return await prisma.orders.findUnique({
+        where: { order_id: +parent.order_id },
+      });
+    },
+    async product(parent) {
+      return await prisma.products.findUnique({
+        where: { product_id: +parent.product_id },
+      });
+    },
+  },
+  Payment: {
+    async order(parent) {
+      return await prisma.orders.findUnique({
+        where: { order_id: +parent.order_id },
+      });
+    },
+  },
 };
