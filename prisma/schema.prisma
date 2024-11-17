@@ -81,8 +81,9 @@ model products {
 model orders {
   order_id      Int       @id @default(autoincrement())
   user_id       Int
-  total_amount  Float
-  status        String    @db.VarChar(50)
+  total_price  Float
+  shipping_address        String    @db.VarChar(50)
+  order_status        String    @db.VarChar(50)
   created_at    DateTime  @default(now())
   updated_at    DateTime  @default(now()) @updatedAt
 

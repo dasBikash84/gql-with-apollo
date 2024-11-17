@@ -1,23 +1,45 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient({
-    log: ['query'],
-  });
+  log: ["query"],
+});
 
 // resolvers
 export const resolvers = {
   Query: {
-    async users(_,args) {    
-        const { skip = 0, take = 10 } = args || {};
-        return await prisma.users.findMany({
-            take: +take,
-            skip: +skip
-        });
+    async users(_, args) {
+      const { skip = 0, take = 10 } = args || {};
+      return await prisma.users.findMany({
+        take: +take,
+        skip: +skip,
+      });
     },
     async user(_, args) {
-        console.log(args);
-        return await prisma.users.findUnique({
-            where: { user_id: +(args['user_id']) }
-        });
+      console.log(args);
+      return await prisma.users.findUnique({
+        where: { user_id: +args["user_id"] },
+      });
+    },
+  },
+  User: {
+    async addresses(parent) {
+      return await prisma.addresses.findMany({
+        where: { user_id: parent.user_id },
+      });
+    },
+    async orders(parent) {
+      return await prisma.orders.findMany({
+        where: { user_id: parent.user_id },
+      });
+    },
+    async product_reviews(parent) {
+      return await prisma.product_reviews.findMany({
+        where: { user_id: parent.user_id },
+      });
+    },
+    async shopping_cart(parent) {
+      return await prisma.shopping_cart.findFirst({
+        where: { user_id: parent.user_id },
+      });
     },
   },
 };
