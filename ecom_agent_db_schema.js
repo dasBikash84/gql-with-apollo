@@ -16,34 +16,34 @@ type User {
 type Address {
   address_id: ID!
   user_id: ID!
-  address_line1: String!
+  address_line1: String
   address_line2: String
-  city: String!
+  city: String
   state: String
-  postal_code: String!
-  country: String!
+  postal_code: String
+  country: String
   phone_number: String
   is_default: Boolean
-  created_at: String!
-  updated_at: String!
+  created_at: String
+  updated_at: String
   user: User
 }
 
 type Category {
   category_id: ID!
-  name: String!
+  name: String
   description: String
-  parent_category_id: ID
+  # parent_category_id: ID
   created_at: String!
   updated_at: String!
-  parent_category: Category
-  subcategories: [Category]
+  # parent_category: Category
+  # subcategories: [Category]
   products: [Product]
 }
 
 type Product {
   product_id: ID!
-  name: String!
+  name: String
   description: String
   price: Float!
   stock_quantity: Int
@@ -126,8 +126,8 @@ type Query {
   users(skip:ID,take:ID): [User]
   user(user_id: ID!): User
   # addresses: [Address]
-  # address(address_id: ID!): Address
-  # categories: [Category]
+  address(user_id: ID!): [Address]
+  categories(skip:ID,take:ID): [Category]
   # category(category_id: ID!): Category
   # products: [Product]
   # product(product_id: ID!): Product
