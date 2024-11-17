@@ -123,25 +123,25 @@ type ShoppingCartItem {
 }
 
 type Query {
-  users: [User]
+  users(skip:ID,take:ID): [User]
   user(user_id: ID!): User
-  addresses: [Address]
-  address(address_id: ID!): Address
-  categories: [Category]
-  category(category_id: ID!): Category
-  products: [Product]
-  product(product_id: ID!): Product
-  orders: [Order]
-  order(order_id: ID!): Order
-  orderItems: [OrderItem]
-  orderItem(order_item_id: ID!): OrderItem
-  payments: [Payment]
-  payment(payment_id: ID!): Payment
-  productReviews: [ProductReview]
-  productReview(review_id: ID!): ProductReview
-  shoppingCarts: [ShoppingCart]
-  shoppingCart(cart_id: ID!): ShoppingCart
-  shoppingCartItems: [ShoppingCartItem]
-  shoppingCartItem(cart_item_id: ID!): ShoppingCartItem
+  # addresses: [Address]
+  # address(address_id: ID!): Address
+  # categories: [Category]
+  # category(category_id: ID!): Category
+  # products: [Product]
+  # product(product_id: ID!): Product
+  # orders: [Order]
+  # order(order_id: ID!): Order
+  # orderItems: [OrderItem]
+  # orderItem(order_item_id: ID!): OrderItem
+  # payments: [Payment]
+  # payment(payment_id: ID!): Payment
+  # productReviews: [ProductReview]
+  # productReview(review_id: ID!): ProductReview
+  # shoppingCarts: [ShoppingCart]
+  # shoppingCart(cart_id: ID!): ShoppingCart
+  # shoppingCartItems: [ShoppingCartItem]
+  # shoppingCartItem(cart_item_id: ID!): ShoppingCartItem
 }
 `

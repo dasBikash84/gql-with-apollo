@@ -1,11 +1,14 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
+import { typeDefs } from './ecom_agent_db_schema.js'
+import { resolvers } from './aerd_resolver.js'
+
 // data
-import db from './_db.js'
+// import db from './_db.js'
 
 // types
-import { typeDefs } from './schema.js'
+/*import { typeDefs } from './schema.js'
 
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
@@ -61,7 +64,7 @@ const resolvers = {
     }
   },
 }
-
+*/
 // server setup
 const server = new ApolloServer({
   typeDefs,
