@@ -131,8 +131,8 @@ type Query {
   category(category_id: ID!): Category
   products(skip:ID,take:ID): [Product]
   product(product_id: ID!): Product
-  # orders: [Order]
-  # order(order_id: ID!): Order
+  orders(skip:ID,take:ID): [Order]
+  order(order_id: ID!): Order
   # orderItems: [OrderItem]
   # orderItem(order_item_id: ID!): OrderItem
   # payments: [Payment]

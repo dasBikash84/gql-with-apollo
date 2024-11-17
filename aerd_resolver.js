@@ -47,6 +47,18 @@ export const resolvers = {
         where: { product_id: +args["product_id"] },
       });
     },
+    async orders(_, args) {
+      const { skip = 0, take = 10 } = args || {};
+      return await prisma.orders.findMany({
+        take: +take,
+        skip: +skip,
+      });
+    },
+    async order(_, args) {
+      return await prisma.orders.findUnique({
+        where: { order_id: +args["order_id"] },
+      });
+    },
   },
   User: {
     async addresses(parent) {
@@ -117,4 +129,21 @@ export const resolvers = {
       });
     },
   },
+    Order: {
+        async user(parent) {
+        return await prisma.users.findUnique({
+            where: { user_id: parent.user_id },
+        });
+        },
+        async order_items(parent) {
+        return await prisma.order_items.findMany({
+            where: { order_id: +parent.order_id },
+        });
+        },
+        async payments(parent) {
+        return await prisma.payments.findMany({
+            where: { order_id: +parent.order_id },
+        });
+        },
+    },
 };
