@@ -7,10 +7,23 @@ import db from './_db.js'
 // types
 import { typeDefs } from './schema.js'
 
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 // resolvers
 const resolvers = {
   Query: {
     games() {
+      (async()=>{
+        const games = await prisma.users.findMany({
+          include: {
+            reviews: true
+          }
+        })
+        games.forEach(game => {
+          console.log(game.email);
+        });
+      })();
       return db.games
     },
     game(_, args) {
@@ -60,3 +73,4 @@ const { url } = await startStandaloneServer(server, {
 })
 
 console.log(`Server ready at: ${url}`)
+
