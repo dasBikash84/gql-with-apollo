@@ -1,38 +1,28 @@
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient({
+import { findManyWithPagination, findUnique } from "./prisma/utlis/prisma_query_utils";
+export const prisma = new PrismaClient({
   log: ["query"],
 });
 
-const findMany = async (model, args) => {
-  const { skip = 0, take = 10 } = args || {};
-  return await prisma[model].findMany({
-    take: +take,
-    skip: +skip,
-  });
-};
-const findUnique = async (model, fieldName, argFieldVal) => {
-  return await prisma[model].findUnique({
-    where: { [fieldName]: argFieldVal },
-  });
-};
+
 
 // resolvers
 export const resolvers = {
   Query: {
     async users(_, args) {
-      return await findMany("users", args);
+      return await findManyWithPagination("users", args);
     },
     async user(_, args) {
       return await findUnique("users", "user_id", +args["user_id"]);
     },
     async addresses(_, args) {
-      return await findMany("addresses", args);
+      return await findManyWithPagination("addresses", args);
     },
     async address(_, args) {
       return await findUnique("addresses", "address_id", +args["address_id"]);
     },
     async categories(_, args) {
-      return await findMany("categories", args);
+      return await findManyWithPagination("categories", args);
     },
     async category(_, args) {
       return await findUnique(
@@ -42,19 +32,19 @@ export const resolvers = {
       );
     },
     async products(_, args) {
-      return await findMany("products", args);
+      return await findManyWithPagination("products", args);
     },
     async product(_, args) {
       return await findUnique("products", "product_id", +args["product_id"]);
     },
     async orders(_, args) {
-      return await findMany("orders", args);
+      return await findManyWithPagination("orders", args);
     },
     async order(_, args) {
       return await findUnique("orders", "order_id", +args["order_id"]);
     },
     async orderItems(_, args) {
-      return await findMany("order_items", args);
+      return await findManyWithPagination("order_items", args);
     },
     async orderItem(_, args) {
       return await findUnique(
@@ -64,13 +54,13 @@ export const resolvers = {
       );
     },
     async payments(_, args) {
-      return await findMany("payments", args);
+      return await findManyWithPagination("payments", args);
     },
     async paymentItem(_, args) {
       return await findUnique("payments", "payment_id", +args["payment_id"]);
     },
     async productReviews(_, args) {
-      return await findMany("product_reviews", args);
+      return await findManyWithPagination("product_reviews", args);
     },
     async productReviewItem(_, args) {
       return await findUnique(
@@ -80,13 +70,13 @@ export const resolvers = {
       );
     },
     async shoppingCarts(_, args) {
-      return await findMany("shopping_cart", args);
+      return await findManyWithPagination("shopping_cart", args);
     },
     async shoppingCart(_, args) {
       return await findUnique("shopping_cart", "cart_id", +args["cart_id"]);
     },
     async shoppingCartItems(_, args) {
-      return await findMany("shopping_cart_items", args);
+      return await findManyWithPagination("shopping_cart_items", args);
     },
     async shoppingCartItem(_, args) {
       return await findUnique(
