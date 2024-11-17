@@ -74,7 +74,7 @@ model products {
   category      categories  @relation(fields: [category_id], references: [category_id])
   orderItems    order_items[]
   reviews       product_reviews[]
-  cartItems     shopping_cart_items[]
+  shopping_cart_items     shopping_cart_items[]
 
   @@index([category_id])
 }
@@ -100,9 +100,9 @@ model order_items {
   order_id      Int
   product_id    Int
   quantity      Int
-  price         Float
+  unit_price         Float
+  total_price         Float
   created_at    DateTime  @default(now())
-  updated_at    DateTime  @default(now()) @updatedAt
 
   order         orders     @relation(fields: [order_id], references: [order_id])
   product       products   @relation(fields: [product_id], references: [product_id])
@@ -155,8 +155,7 @@ model shopping_cart_items {
   cart_id       Int
   product_id    Int
   quantity      Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @default(now()) @updatedAt
+  added_at    DateTime  @default(now()) 
 
   cart          shopping_cart @relation(fields: [cart_id], references: [cart_id])
   product       products      @relation(fields: [product_id], references: [product_id])

@@ -34,8 +34,8 @@ type Category {
   name: String
   description: String
   # parent_category_id: ID
-  created_at: String!
-  updated_at: String!
+  created_at: String
+  updated_at: String
   # parent_category: Category
   # subcategories: [Category]
   products: [Product]
@@ -115,9 +115,9 @@ type ShoppingCart {
 type ShoppingCartItem {
   cart_item_id: ID!
   cart_id: ID!
-  product_id: ID!
+  product_id: ID
   quantity: Int!
-  added_at: String!
+  added_at: String
   shopping_cart: ShoppingCart
   product: Product
 }
@@ -128,9 +128,9 @@ type Query {
   # addresses: [Address]
   address(user_id: ID!): [Address]
   categories(skip:ID,take:ID): [Category]
-  # category(category_id: ID!): Category
-  # products: [Product]
-  # product(product_id: ID!): Product
+  category(category_id: ID!): Category
+  products(skip:ID,take:ID): [Product]
+  product(product_id: ID!): Product
   # orders: [Order]
   # order(order_id: ID!): Order
   # orderItems: [OrderItem]
