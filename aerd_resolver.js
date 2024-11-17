@@ -3,128 +3,97 @@ const prisma = new PrismaClient({
   log: ["query"],
 });
 
+const findMany = async (model, args) => {
+  const { skip = 0, take = 10 } = args || {};
+  return await prisma[model].findMany({
+    take: +take,
+    skip: +skip,
+  });
+};
+const findUnique = async (model, fieldName, argFieldVal) => {
+  return await prisma[model].findUnique({
+    where: { [fieldName]: argFieldVal },
+  });
+};
+
 // resolvers
 export const resolvers = {
   Query: {
     async users(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.users.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("users", args);
     },
     async user(_, args) {
-      return await prisma.users.findUnique({
-        where: { user_id: +args["user_id"] },
-      });
+      return await findUnique("users", "user_id", +args["user_id"]);
     },
     async addresses(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.addresses.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("addresses", args);
     },
     async address(_, args) {
-      return await prisma.addresses.findMany({
-        where: { address_id: +args["address_id"] },
-      });
+      return await findUnique("addresses", "address_id", +args["address_id"]);
     },
     async categories(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.categories.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("categories", args);
     },
     async category(_, args) {
-      return await prisma.categories.findUnique({
-        where: { category_id: +args["category_id"] },
-      });
+      return await findUnique(
+        "categories",
+        "category_id",
+        +args["category_id"]
+      );
     },
     async products(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.products.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("products", args);
     },
     async product(_, args) {
-      return await prisma.products.findUnique({
-        where: { product_id: +args["product_id"] },
-      });
+      return await findUnique("products", "product_id", +args["product_id"]);
     },
     async orders(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.orders.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("orders", args);
     },
     async order(_, args) {
-      return await prisma.orders.findUnique({
-        where: { order_id: +args["order_id"] },
-      });
+      return await findUnique("orders", "order_id", +args["order_id"]);
     },
     async orderItems(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.order_items.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("order_items", args);
     },
     async orderItem(_, args) {
-      return await prisma.order_items.findUnique({
-        where: { order_item_id: +args["order_item_id"] },
-      });
+      return await findUnique(
+        "order_items",
+        "order_item_id",
+        +args["order_item_id"]
+      );
     },
     async payments(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.payments.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("payments", args);
     },
     async paymentItem(_, args) {
-      return await prisma.payments.findUnique({
-        where: { payment_id: +args["payment_id"] },
-      });
+      return await findUnique("payments", "payment_id", +args["payment_id"]);
     },
     async productReviews(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.product_reviews.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("product_reviews", args);
     },
     async productReviewItem(_, args) {
-      return await prisma.product_reviews.findUnique({
-        where: { review_id: +args["review_id"] },
-      });
+      return await findUnique(
+        "product_reviews",
+        "review_id",
+        +args["review_id"]
+      );
     },
     async shoppingCarts(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.shopping_cart.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("shopping_cart", args);
     },
     async shoppingCart(_, args) {
-      return await prisma.shopping_cart.findUnique({
-        where: { cart_id: +args["cart_id"] },
-      });
+      return await findUnique("shopping_cart", "cart_id", +args["cart_id"]);
     },
     async shoppingCartItems(_, args) {
-      const { skip = 0, take = 10 } = args || {};
-      return await prisma.shopping_cart_items.findMany({
-        take: +take,
-        skip: +skip,
-      });
+      return await findMany("shopping_cart_items", args);
     },
     async shoppingCartItem(_, args) {
-      return await prisma.shopping_cart_items.findUnique({
-        where: { cart_item_id: +args["cart_item_id"] },
-      });
+      return await findUnique(
+        "shopping_cart_items",
+        "cart_item_id",
+        +args["cart_item_id"]
+      );
     },
   },
   User: {

@@ -126,7 +126,7 @@ type Query {
   users(skip:ID,take:ID): [User]
   user(user_id: ID!): User
   addresses(skip:ID,take:ID): [Address]
-  address(address_id: ID!): [Address]
+  address(address_id: ID!): Address
   categories(skip:ID,take:ID): [Category]
   category(category_id: ID!): Category
   products(skip:ID,take:ID): [Product]
