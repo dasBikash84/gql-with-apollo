@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-import { findManyWithPagination, findUnique } from "./prisma/utlis/prisma_query_utils";
-export const prisma = new PrismaClient({
-  log: ["query"],
-});
-
-
+import {
+  findManyWithPagination,
+  findUnique,
+  prismaClient as prisma
+} from "./prisma/utlis/prisma_query_utils.js";
 
 // resolvers
 export const resolvers = {

@@ -1,4 +1,4 @@
-import { prisma } from "../../aerd_resolver";
+import {prisma} from '../prisma_client.js';
 
 /**
  * Retrieves multiple records from the specified model with pagination.
@@ -30,3 +30,5 @@ export const findUnique = async (model, fieldName, argFieldVal) => {
     where: { [fieldName]: argFieldVal },
   });
 };
+
+export const prismaClient = prisma;
